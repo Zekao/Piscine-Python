@@ -8,9 +8,8 @@ def valid_content(name, cooking_lvl, cooking_time, ingredients, description, rec
     assert (type(ingredients) != list or len(ingredients) != 0), "ingredients should be a list not empty"
     assert (type(recipe) != list or len(recipe) == 0), "recipe should be a list not empty"
     return True
+    
 class Recipe:
-
-
 
     def __init__(self, name, cooking_lvl, cooking_time, ingredients, description=None, recipe_type=None, recipe=None):
             if (valid_content(name, cooking_lvl, cooking_time, ingredients, description, recipe) is True):
