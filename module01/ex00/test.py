@@ -1,12 +1,18 @@
+import sys
 from book import Book
-from recipe import Recipe 
+from recipe import Recipe
+
 
 def main():
-    book = Book("My Book")
-    recipe = Recipe("Cake", 1, 10, ["flour", "sugar", "eggs"], "Mix everything", "Bake 30 min at 180°C")
-    # book.add_recipe(recipe)
-    book.get_recipe_by_name("Cake")
-    # book.get_recipes_by_types("dessert")
+    tourte = Recipe("Tourte", 1, 30, ["pate", "oeuf", "lardons"], "Une tourte", "lunch")
+    # print(str(tourte))
+
+    book = Book("My book")
+    book.add_recipe(tourte)
+    book.get_recipe_by_name(tourte.name)
+    print('test')
+    print(book.get_recipes_by_types(tourte.recipe_type))
+
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
