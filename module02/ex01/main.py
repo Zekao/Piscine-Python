@@ -1,6 +1,8 @@
 def what_are_the_vars(*args, **kwargs):
     """
-    ...
+        @obj: an instance of a class that inherits from `ObjectC`
+        we will create an enumerate of all the attributes in kwargs
+        and after that we will create add each attribute to the obj instance
     """
     obj = ObjectC()
     for i, arg in enumerate(args):
