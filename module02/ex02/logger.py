@@ -6,20 +6,22 @@ from datetime import datetime, timezone
 
 def log(fn):
 
-    USER = os.getenv('USER')
     def test(*args, **kwargs):
-        called_at = datetime.now(timezone.utc)
+        start_time = time.time()
         to_execute = fn(*args, **kwargs)
-        with open('machine.log', 'a+') as f:
-            f.write(f'USER: {USER}\t')
-            f.write(f'PID: {os.getpid()}\t')
-            f.write(f'DATETIME: {called_at}\t')
-            f.write(f'FUNCTION: {fn.__name__}\t')
-            f.write(f'INPUTS: {args}\t')
+        called_at = datetime.now(timezone.utc)
+        USER = os.getenv('USER')
+        end = time.time()
+        exec_time = end - start_time
+        unit = "s"
+        if exec_time < 1:
+            exec_time *= 1000
+            unit = "ms"
+        
+        string =  f'({USER}) Running: {fn.__name__}\t[ exec-time = {exec_time:.3f} {unit}]\n'
 
-            # start_time = time.time()
-            # f.write(f'({USER})Running: {fn.__name__} [ exec_time: {time.time() - start_time} ]\n')
-            # f.write( '(' + str(USER) + ')Running: (to_execute, {0})  ''[exec-time ='  + str(time.time() - start_time) + ']\n')
+        with open('machine.log', 'a+') as f:
+            f.write(string)
         return to_execute
     
     return test
