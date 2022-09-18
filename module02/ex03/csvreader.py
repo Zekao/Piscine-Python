@@ -42,7 +42,7 @@ class CsvReader:
         """
         data = self.data
         if self.header:
-            getheader(self)
+            self.getheader()
         if self.skip_top:
             self.data = self.data[self.skip_top:]
         if self.skip_bottom:
