@@ -29,7 +29,6 @@ class NumPyCreator():
     def identify(self, n):
         assert (isinstance(n, int)), "Parameter should be an integer"
         return (np.identity(n))
-        # return (np.random.rand(shape))
 
 # create a main function
 def main():
