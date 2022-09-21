@@ -25,6 +25,10 @@ class NumPyCreator():
     def random(self, shape):
         assert (isinstance(shape, tuple)), "Parameter should be a tuple"
         return (np.random.rand(*shape))
+
+    def identify(self, n):
+        assert (isinstance(n, int)), "Parameter should be an integer"
+        return (np.identity(n))
         # return (np.random.rand(shape))
 
 # create a main function
