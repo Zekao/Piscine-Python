@@ -67,10 +67,11 @@ class ScrapBooker():
             return None
         elif (axis == 1 and n >= array.shape[1]):
             return None
-        
-        new_arr = np.delete(array, np.s_[::n], axis)
-        return new_arr       
-            
+        if (axis == 0):
+            new_arr = np.delete(array, np.s_[n-1::n], axis=1)
+        elif (axis == 1):
+            new_arr = np.delete(array, np.s_[n-1::n], axis=0)
+        return new_arr            
 
 
     def juxtapose(self, array, n, axis):
@@ -89,6 +90,15 @@ class ScrapBooker():
         -------
         This function should not raise any Exception.
         """
+        if not isinstance(array, np.ndarray):
+            return None
+        elif not isinstance(n, int) or n < 0:
+            return None
+        elif not isinstance(axis, int) or axis != 0 and axis != 1:
+            return None
+
+        new_arr = np.concatenate([array for i in range(n)], axis=axis)
+        return new_arr
         # ... your code ...
     def mosaic(self, array, dim):
         """
@@ -106,4 +116,10 @@ class ScrapBooker():
         -------
         This function should not raise any Exception.
         """
-        # ... your code ...
+        if not isinstance(array, np.ndarray):
+            return None
+        if not isinstance(dim, tuple) or len(dim) != 2 or not all(isinstance(x, (int, float)) for x in dim):
+            return None
+
+        new_arr = np.tile(array, dim)
+        return new_arr
