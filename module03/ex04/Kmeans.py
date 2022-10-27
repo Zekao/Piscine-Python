@@ -6,7 +6,6 @@ import matplotlib.pyplot as plt
 class KmeansClustering:
     def __init__(self, max_iter=20, ncentroid=5):
         self.ncentroid = ncentroid
-        print('ncentroid: ', ncentroid)
         self.max_iter = max_iter
         self.centroids = []
 
@@ -44,19 +43,25 @@ class KmeansClustering:
         -------
         This function should not raise any Exception.
         """
-
-        if (isinstance(X, np.ndarray) and len(X.shape) == 2):
-            dist = np.linalg.norm(X[:, np.newaxis, :] - self.centroids[np.newaxis, :, :], axis=2)
-            return np.argmin(dist, axis=1)
-
-        return None
+        # if (isinstance(X, np.ndarray) and len(X.shape) == 2):
+        dist = np.linalg.norm(X[:, np.newaxis, :] - self.centroids[np.newaxis, :, :], axis=2)
+        return np.argmin(dist, axis=1)
     
 def main(**kwargs):
     
-    kluster = KmeansClustering(20, 5)
-    kluster.predict([1, 6, 7, 81, 5, 7, 9])
-    print(kluster)
-    plt.show()
+    kluster = KmeansClustering(**kwargs)
+    data = np.genfromtxt("data.csv", delimiter=",")
+
+    
+    
+
+
+
+
+    # plt.scatter(X[:, 0], X[:, 1], c=kluster.predict(X))
+    
+    # plt.show()
+
 
 
 if __name__ == '__main__':
