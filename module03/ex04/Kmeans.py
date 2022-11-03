@@ -2,9 +2,10 @@ from ast import arg
 from grapheme import length
 import numpy as np
 import matplotlib.pyplot as plt
+import sys
 
 class KmeansClustering:
-    def __init__(self, max_iter=20, ncentroid=4):
+    def __init__(self, max_iter=20, ncentroid=4, filepath=None):
         self.ncentroid = ncentroid
         self.max_iter = max_iter
         self.centroids = []
@@ -27,7 +28,6 @@ class KmeansClustering:
         for i in range(self.max_iter):
             labels = self.predict(X)
             self.centroids = np.array([X[labels == i].mean(axis=0) for i in range(self.ncentroid)])
-        print(labels)
         return 
 
     def predict(self, X):
@@ -49,22 +49,29 @@ class KmeansClustering:
 def main(**kwargs):
     
     kluster = KmeansClustering(**kwargs)
-    data = np.genfromtxt("data.csv", delimiter=",", skip_header=1)
-    kluster.fit(data)
-    labels = kluster.predict(data)
+    data = np.genfromtxt(kwargs.get('filepath'), delimiter=",", skip_header=1)
+
+    for _ in range(0, 20):
+        kluster.fit(data)
+        labels = kluster.predict(data)
+        for i in range(kluster.ncentroid):
+            print("Cluster %d: %d points" % (i, np.sum(labels == i)))
+        print ('-' * 120)
+
+
     plt.scatter(data[:, 0], data[:, 1], c=labels)
-    plt.legend(loc="upper left") 
-
+    plt.legend
     plt.show()
-    
-    
 
-
-
-
-    # plt.scatter(X[:, 0], X[:, 1], c=kluster.predict(X))
-    
-    # plt.show()
+if __name__ == "__main__":
+    args = {}
+    for arg in sys.argv:
+        if '=' in arg:
+            k, v = arg.split('=')
+            args[k] = v
+            if v.isdigit():
+                args[k] = int(v)
+    main(**args)
 
 
 
