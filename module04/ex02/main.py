@@ -1,5 +1,5 @@
 from ProportionBySport import proportion_by_sport
-from FileLoader import FileLoader
+from ex03.FileLoader import FileLoader
 
 
 def main():

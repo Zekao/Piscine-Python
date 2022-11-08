@@ -9,6 +9,5 @@ def proportion_by_sport(df, year, sport, gender):
     for_sport = df.loc[df['Year'] == year]
     current_gender = for_sport.loc[df['Sex'] == gender]
     for_sport = current_gender[df['Sport'] == sport]
-    print(for_sport)
-    print(current_gender)
-    print ((for_sport.shape[0] / current_gender.shape[0]) * 100)
+
+    return (for_sport.shape[0] / current_gender.shape[0])
