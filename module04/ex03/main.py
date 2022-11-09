@@ -7,8 +7,7 @@ def main():
     data = loader.load('../data/athlete_events.csv')
     dict_ = how_many_medals(data, 'Kjetil Andr Aamodt')
 
-    for row in dict_:
-        print(row)
+    print (dict_)
 
 if __name__ == "__main__":
     main()

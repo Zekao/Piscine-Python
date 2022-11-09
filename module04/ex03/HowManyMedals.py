@@ -7,15 +7,11 @@ def how_many_medals(df, name):
     df = df[df.Medal.notnull()]
     new_df = df.loc[df['Name'] == name]
     new_df = new_df.groupby(['Year', 'Medal']).size()
-    new_df = new_df.to_frame()
+    new_df = new_df.rename(index={'Bronze': 'B', 'Silver': 'S', 'Gold': 'G'})
+    new_df = new_df.unstack(level=-1).fillna(0).astype(int)
+    new_df = new_df.to_dict(orient='index')
 
-    # sort new_df by year descending
-    new_df = new_df.sort_values(by=['Year'], ascending=True)
-    dict_medals = [ ]
-    for year in new_df.index.levels[0]:
-        dict_medals.append({'Year': year, 'Gold': 0, 'Silver': 0, 'Bronze': 0})
-        for medal in new_df.index.levels[1]:
-            if (year, medal) in new_df.index:
-                dict_medals[-1][medal] = new_df.loc[(year, medal)][0]
 
-    return dict_medals
+    for year in new_df:
+        new_df[year] = {k: new_df[year][k] for k in ['G', 'S', 'B']}
+    return new_df
