@@ -1,5 +1,5 @@
 from YoungestFellah import youngest_fellah
-from ex03.FileLoader import FileLoader
+from FileLoader import FileLoader
 
 
 def main():

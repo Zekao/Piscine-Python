@@ -17,11 +17,13 @@ class FileLoader():
 
     def display(self, df, n):
         assert isinstance(df, pd.DataFrame), 'df is not a dataframe'
-        assert n >= 0, 'n must be a positive value'
-        print(df.head(n))
+        if (n > 0):
+            print(df.head(n))
+        else:
+            print(df.tail(abs(n)))
         return
 
-# if __name__ == "__main__":
-#     fl = FileLoader()
-#     df = fl.load('athlete_events.csv')
-#     fl.display(df, 2)
+if __name__ == "__main__":
+    fl = FileLoader()
+    df = fl.load('athlete_events.csv')
+    fl.display(df, -12)
