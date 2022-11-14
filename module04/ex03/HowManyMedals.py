@@ -2,16 +2,19 @@ import pandas as pd
 
 def how_many_medals(df, name):
     assert (isinstance(df, pd.DataFrame)), 'Parameter must be a dataframe'
-    assert (isinstance(name, str)), 'name must be a string'
+    assert (isinstance(name, str)), 'name must be a string
+    
+    new_df = df[df['Name'] == name]
+    new_df.sort_values(by=['Year'])
 
-    df = df[df.Medal.notnull()]
-    new_df = df.loc[df['Name'] == name]
-    new_df = new_df.groupby(['Year', 'Medal']).size()
-    new_df = new_df.rename(index={'Bronze': 'B', 'Silver': 'S', 'Gold': 'G'})
-    new_df = new_df.unstack(level=-1).fillna(0).astype(int)
-    new_df = new_df.to_dict(orient='index')
+    ret_dict = dict(enumerate(new_df.Year.unique()))
+    ret_dict = {v: k for k, v in ret_dict.items()}
 
+    for key, _  in ret_dict.items() :
+        ret_dict[key] = {
+        'G' : sum((new_df.Year == key) & (new_df.Medal == 'Gold')),
+        'S':  sum((new_df.Year == key) & (new_df.Medal == 'Silver')),
+        'B':  sum((new_df.Year == key) & (new_df.Medal == 'Bronze'))
+        }
 
-    for year in new_df:
-        new_df[year] = {k: new_df[year][k] for k in ['G', 'S', 'B']}
-    return new_df
+    return ret_dict
