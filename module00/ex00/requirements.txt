@@ -64,7 +64,7 @@ pytz @ file:///opt/conda/conda-bld/pytz_1654762638606/work
 pyzmq @ file:///tmp/build/80754af9/pyzmq_1638434924971/work
 qtconsole @ file:///opt/conda/conda-bld/qtconsole_1649078897110/work
 QtPy @ file:///opt/conda/conda-bld/qtpy_1649073884068/work
-requests==2.28.0
+requests==2.31.0
 rich==12.4.4
 Send2Trash @ file:///tmp/build/80754af9/send2trash_1632406701022/work
 six @ file:///tmp/build/80754af9/six_1644875935023/work
